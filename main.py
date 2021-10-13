@@ -35,6 +35,7 @@ pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
 
+'''главный цикл программы'''
 while not finished:
     clock.tick(FPS)
     for event in pygame.event.get():
