@@ -8,6 +8,15 @@ you have only 10 seconds, try to catch them all!
 
 ## Usage
 
+Requirements:
+```bash
+pip install pygame
+```
+
+```bash
+sudo apt intall python-tk
+```
+
 For windows:
 ```bash
 py Main.py
