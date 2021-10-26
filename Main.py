@@ -1,6 +1,6 @@
 import pygame
 import Ball
-from ast import literal_eval
+from ast import literal_eval # нужна для считывания информации из файла сохранения рекордов 
 from Constants import *
 
 
