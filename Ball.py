@@ -4,6 +4,7 @@ from random import randint
 
 class Ball():
     def __init__(self, game):
+        '''инициализация класса Ball'''
         self.game = game
 
         self.r = randint(20, 50)
@@ -14,9 +15,11 @@ class Ball():
         self.color = (randint(0, 255), randint(0, 255), randint(0, 255))
 
     def render(self, screen):
+        '''отрисовка шарика'''
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.r)
 
     def move(self):
+        '''метод который отвечает за движение шарика и случайный отскок от стенок'''
         self.x += self.Vx
         self.y += self.Vy
 
@@ -37,4 +40,5 @@ class Ball():
             self.Vy = randint(0, 10)
 
     def remove(self):
+        '''удаление шарика'''
         self.game.objects.remove(self)

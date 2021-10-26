@@ -6,7 +6,9 @@ from Constants import *
 
 
 class Main():
+    '''Главный класс игры, где определяются такие методы как рендеринг всего, главный цикл, сохранение прогресса игры'''
     def __init__(self, screen, playerName):
+        '''Объявление параметров игры'''
         self.screen = screen
         self.running = True
 
@@ -15,10 +17,11 @@ class Main():
 
         self.myfont = pygame.font.SysFont('Comic Sans MS', 30)
         self.counter = 10
-        self.objects = []
+        self.objects = [] # массив в котором содержатся все летающие объекты (в частности шарики)
         self.main_loop()
 
     def save(self):
+        '''Сохранение прогресса'''
         try:
             with open('score.txt', 'r') as f:
                 data = f.read()
@@ -35,7 +38,7 @@ class Main():
                 else:
                     data[self.playerName] = self.playerScore
                     print(f"New score by {self.playerName}!")
-        except FileNotFoundError:
+        except FileNotFoundError: # обработка случая, когда файл записи рекордов отсуствует
             with open('score.txt', 'x') as f:
                     data = {}
                     print(f"New score by {self.playerName}!") 
@@ -48,11 +51,12 @@ class Main():
 
 
     def handle_events(self):
+        '''Обработчик действий игрока'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.USEREVENT:
-                self.counter -= 1
+                self.counter -= 1 # обратный отсчет
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 for j in self.objects:
                     if abs(event.pos[0] - j.x) < j.r and abs(event.pos[1] - j.y) < j.r:
@@ -76,7 +80,7 @@ class Main():
         '''Основной цикл программы'''
 
         for i in range(15):
-            self.objects.append(Ball.Ball(self))
+            self.objects.append(Ball.Ball(self)) # добавление на экран 15 шариков
 
         clock = pygame.time.Clock()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
@@ -98,6 +102,7 @@ class Main():
 
 
 def start():
+    '''Простой интерфейс'''
     print("========================================")
     choice = input('enter number to select:\n 1 - start the game \n 2 - show the high score table \n >>>')
     if choice == '1':
@@ -117,8 +122,8 @@ def start():
                 start()
 
 
-        except FileNotFoundError:
-            print("there is no record file \n play firstly")
+        except FileNotFoundError: # обработка случая, когда файл рекордов отсутствует
+            print("there is no record file \nplay firstly")
             start()
 
 start()
